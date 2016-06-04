@@ -4,9 +4,9 @@
   <%= render 'post', post: post %>
 <% end %>
 <div style="float:rigth">
-Lista de categorias
+<h4>Lista de categorias <%= link_to '(Nueva)', new_category_path %></h4>
 <% @categories.each do |c| %>
 
-  <%= link_to c.title, posts_path(title: c.title) %>
+  <br><%= link_to c.title, posts_path(title: c.title) %>
 <% end %>
 </div>
