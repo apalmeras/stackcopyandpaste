@@ -25,7 +25,8 @@
   </div>
   <div class="field">
     <%= f.label :category %><br>
-    <%= f.text_area :category %>
+    <% categories_array = @categories.map { |c| [c.title, c.title] } %>
+    <%= f.select :category, options_for_select(categories_array) %>
   </div>
  
  <div class="actions">
