@@ -5,8 +5,15 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.order('created_at desc').limit(10)
+    if params[:title] then
+      @posts = Post.where(category: params[:title]).order('created_at desc').limit(10)
+    else
+      @posts = Post.order('created_at desc').limit(10)
+    end
+    @categories = Category.all
   end
+  
+  
 
   # GET /posts/1
   # GET /posts/1.json
