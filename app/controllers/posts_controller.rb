@@ -28,6 +28,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /posts
@@ -37,10 +38,12 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     
     respond_to do |format|
-      if @post.save
+      if !@post.category.nil? && @post.save 
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
+         @categories = Category.all
+         @post.errors.add(:category,  'necesita seleccionar una categoria')
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end

@@ -3,6 +3,9 @@ require 'rails_helper'
 RSpec.feature "Addposts", type: :feature do
   scenario "Success create post" do
     user = create(:user)
+    create(:category)
+    
+    
 
     visit new_user_session_path
 
@@ -18,8 +21,10 @@ RSpec.feature "Addposts", type: :feature do
     fill_in 'Description', :with => "La camara secreta"
     fill_in 'Author', :with => "Carlos Pino"
     
-    #click_button 'Create Post'
+    select 'Ficcion', :from => 'Category'
+    
+    click_button 'Create Post'
 
-    #expect(page).to have_text 'Post was successfully created.'
+    expect(page).to have_text 'Post was successfully created.'
   end
 end
